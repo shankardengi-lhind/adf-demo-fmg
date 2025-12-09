@@ -1,0 +1,9 @@
+{
+	"name": "adf-fmg-demo",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "71b45f14-f481-4507-8409-e36f4b33c0d4",
+		"tenantId": "d9f5cb22-01c9-4956-b859-4f876f6a5c83"
+	}
+}
