@@ -10,14 +10,15 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "*.tsv.gz",
+				"fileName": "population_by_age copy.tsv.gz",
 				"container": "population"
 			},
 			"columnDelimiter": "\t",
+			"rowDelimiter": "\n",
 			"compressionCodec": "gzip",
 			"compressionLevel": "Optimal",
 			"escapeChar": "\\",
-			"firstRowAsHeader": true,
+			"firstRowAsHeader": false,
 			"quoteChar": "\""
 		},
 		"schema": []
