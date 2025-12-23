@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "*.gz",
+				"fileName": "*.tsv.gz",
 				"container": "population"
 			},
 			"columnDelimiter": "\t",
