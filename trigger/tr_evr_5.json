@@ -1,0 +1,17 @@
+{
+	"name": "tr_evr_5",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 2,
+				"startTime": "2025-12-24T13:22:00",
+				"timeZone": "W. Europe Standard Time"
+			}
+		}
+	}
+}
