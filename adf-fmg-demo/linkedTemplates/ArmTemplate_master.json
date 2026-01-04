@@ -23,13 +23,13 @@
 			"type": "string",
 			"defaultValue": "https://adfdemofmg.dfs.core.windows.net/"
 		},
-		"ls_source_http_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "@{linkedService().base_url}"
-		},
 		"ls_sink_dl_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adfdemofmg.dfs.core.windows.net/"
+		},
+		"ls_source_http_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().base_url}"
 		},
 		"containerUri": {
 			"type": "string",
@@ -70,11 +70,11 @@
 					"ls_adls_covidreportingdl_properties_typeProperties_url": {
 						"value": "[parameters('ls_adls_covidreportingdl_properties_typeProperties_url')]"
 					},
-					"ls_source_http_properties_typeProperties_url": {
-						"value": "[parameters('ls_source_http_properties_typeProperties_url')]"
-					},
 					"ls_sink_dl_properties_typeProperties_url": {
 						"value": "[parameters('ls_sink_dl_properties_typeProperties_url')]"
+					},
+					"ls_source_http_properties_typeProperties_url": {
+						"value": "[parameters('ls_source_http_properties_typeProperties_url')]"
 					}
 				}
 			},
