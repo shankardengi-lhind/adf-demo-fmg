@@ -1,0 +1,233 @@
+{
+	"name": "pl_ingestio",
+	"properties": {
+		"activities": [
+			{
+				"name": "lk_metadata",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "ds_sink_json",
+						"type": "DatasetReference",
+						"parameters": {
+							"sink_folder": {
+								"value": "@pipeline().parameters.metadata_foldor",
+								"type": "Expression"
+							},
+							"file_name": {
+								"value": "@pipeline().parameters.metadata_json",
+								"type": "Expression"
+							}
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "fr_iterator_json",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "lk_metadata",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('lk_metadata').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "sv_sourceBaseURL",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "sv_sourceBaseURL",
+								"value": {
+									"value": "@item().sourceBaseURL",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "sv_sourceRelativeURL",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "sv_sourceRelativeURL",
+								"value": {
+									"value": "@item().sourceRelativeURL",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "sv_sourceBaseURL",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "sv_sourceRelativeURL",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "sv_sinkFileName",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "JsonSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "JsonReadSettings"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_source_http",
+									"type": "DatasetReference",
+									"parameters": {
+										"base_url": {
+											"value": "@variables('sv_sourceBaseURL')",
+											"type": "Expression"
+										},
+										"relative_url": {
+											"value": "@variables('sv_sourceRelativeURL')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_sink_json",
+									"type": "DatasetReference",
+									"parameters": {
+										"sink_folder": {
+											"value": "@pipeline().parameters.sink_folder",
+											"type": "Expression"
+										},
+										"file_name": {
+											"value": "@variables('sv_sinkFileName')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "sv_sinkFileName",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "sv_sinkFileName",
+								"value": {
+									"value": "@item().sinkFileName",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"metadata_foldor": {
+				"type": "string",
+				"defaultValue": "metadata"
+			},
+			"metadata_json": {
+				"type": "string",
+				"defaultValue": "githubusercontent_ecdc_file_list.json"
+			},
+			"sink_folder": {
+				"type": "string",
+				"defaultValue": "ecdc-folder"
+			}
+		},
+		"variables": {
+			"sv_sourceBaseURL": {
+				"type": "String"
+			},
+			"sv_sourceRelativeURL": {
+				"type": "String"
+			},
+			"sv_sinkFileName": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
