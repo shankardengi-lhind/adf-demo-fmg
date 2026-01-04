@@ -11,7 +11,16 @@
 		"ls_adls_covidreportingdl_accountKey": {
 			"value": ""
 		},
+		"ls_sink_dl_accountKey": {
+			"value": ""
+		},
 		"ls_adls_covidreportingdl_properties_typeProperties_url": {
+			"value": "https://adfdemofmg.dfs.core.windows.net/"
+		},
+		"ls_source_http_properties_typeProperties_url": {
+			"value": "@{linkedService().base_url}"
+		},
+		"ls_sink_dl_properties_typeProperties_url": {
 			"value": "https://adfdemofmg.dfs.core.windows.net/"
 		}
 	}
