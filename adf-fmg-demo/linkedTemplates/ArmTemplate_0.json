@@ -460,10 +460,10 @@
 						"timeZone": "W. Europe Standard Time",
 						"schedule": {
 							"minutes": [
-								59
+								4
 							],
 							"hours": [
-								11
+								13
 							]
 						}
 					}
