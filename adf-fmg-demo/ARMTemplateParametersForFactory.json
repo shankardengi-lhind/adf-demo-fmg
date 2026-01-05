@@ -8,13 +8,13 @@
 		"ls_ablob_covidreportingsa_connectionString": {
 			"value": ""
 		},
-		"ls_adls_covidreportingdl_accountKey": {
+		"ls_metadata_dl_accountKey": {
 			"value": ""
 		},
 		"ls_sink_dl_accountKey": {
 			"value": ""
 		},
-		"ls_adls_covidreportingdl_properties_typeProperties_url": {
+		"ls_metadata_dl_properties_typeProperties_url": {
 			"value": "https://adfdemofmg.dfs.core.windows.net/"
 		},
 		"ls_sink_dl_properties_typeProperties_url": {
@@ -22,6 +22,15 @@
 		},
 		"ls_source_http_properties_typeProperties_url": {
 			"value": "@{linkedService().base_url}"
+		},
+		"tr_ingestion_properties_pl_ingestion_http_dl_parameters_metadata_location": {
+			"value": "metadata"
+		},
+		"tr_ingestion_properties_pl_ingestion_http_dl_parameters_sink_data_location": {
+			"value": "ecdc-folder"
+		},
+		"tr_ingestion_properties_pl_ingestion_http_dl_parameters_metadata_filename": {
+			"value": "githubusercontent_ecdc_file_list.json"
 		}
 	}
 }
