@@ -2,7 +2,7 @@
 	"name": "tr_ingestion",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
@@ -25,10 +25,10 @@
 				"timeZone": "W. Europe Standard Time",
 				"schedule": {
 					"minutes": [
-						4
+						59
 					],
 					"hours": [
-						13
+						11
 					]
 				}
 			}
