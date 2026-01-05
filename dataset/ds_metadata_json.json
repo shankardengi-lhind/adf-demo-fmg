@@ -17,7 +17,15 @@
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation"
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().metadata_filename",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().metadata_folder",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {}
