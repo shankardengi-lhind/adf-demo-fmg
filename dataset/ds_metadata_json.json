@@ -1,0 +1,25 @@
+{
+	"name": "ds_metadata_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_metadata_dl",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"metadata_folder": {
+				"type": "string"
+			},
+			"metadata_filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation"
+			}
+		},
+		"schema": {}
+	}
+}

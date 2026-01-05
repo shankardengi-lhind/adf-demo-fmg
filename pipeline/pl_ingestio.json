@@ -27,18 +27,8 @@
 						}
 					},
 					"dataset": {
-						"referenceName": "ds_sink_json",
-						"type": "DatasetReference",
-						"parameters": {
-							"sink_folder": {
-								"value": "@pipeline().parameters.metadata_foldor",
-								"type": "Expression"
-							},
-							"file_name": {
-								"value": "@pipeline().parameters.metadata_json",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "ds_metadata_json",
+						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
 				}
@@ -148,39 +138,7 @@
 									}
 								},
 								"enableStaging": false
-							},
-							"inputs": [
-								{
-									"referenceName": "ds_source_http",
-									"type": "DatasetReference",
-									"parameters": {
-										"base_url": {
-											"value": "@variables('sv_sourceBaseURL')",
-											"type": "Expression"
-										},
-										"relative_url": {
-											"value": "@variables('sv_sourceRelativeURL')",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "ds_sink_json",
-									"type": "DatasetReference",
-									"parameters": {
-										"sink_folder": {
-											"value": "@pipeline().parameters.sink_folder",
-											"type": "Expression"
-										},
-										"file_name": {
-											"value": "@variables('sv_sinkFileName')",
-											"type": "Expression"
-										}
-									}
-								}
-							]
+							}
 						},
 						{
 							"name": "sv_sinkFileName",
@@ -215,6 +173,10 @@
 			"sink_folder": {
 				"type": "string",
 				"defaultValue": "ecdc-folder"
+			},
+			"metadata_file": {
+				"type": "string",
+				"defaultValue": "githubusercontent_ecdc_file_list.json"
 			}
 		},
 		"variables": {
