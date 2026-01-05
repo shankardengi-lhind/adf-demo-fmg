@@ -3,7 +3,19 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
-		"pipelines": [],
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_ingestion_http_dl",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"metadata_location": "metadata",
+					"sink_data_location": "ecdc-folder",
+					"metadata_filename": "githubusercontent_ecdc_file_list.json"
+				}
+			}
+		],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
