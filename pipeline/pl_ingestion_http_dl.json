@@ -157,17 +157,6 @@
 				"defaultValue": "githubusercontent_ecdc_file_list.json"
 			}
 		},
-		"variables": {
-			"sourceBaseURL": {
-				"type": "String"
-			},
-			"sourceRelativeURL\"": {
-				"type": "String"
-			},
-			"sinkFileName": {
-				"type": "String"
-			}
-		},
 		"annotations": []
 	}
 }
