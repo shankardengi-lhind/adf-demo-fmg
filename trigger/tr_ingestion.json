@@ -9,11 +9,11 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2026-01-05T11:52:00",
+				"startTime": "2026-01-05T11:54:00",
 				"timeZone": "W. Europe Standard Time",
 				"schedule": {
 					"minutes": [
-						55
+						57
 					],
 					"hours": [
 						11
