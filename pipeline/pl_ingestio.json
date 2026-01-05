@@ -28,7 +28,17 @@
 					},
 					"dataset": {
 						"referenceName": "ds_metadata_json",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"metadata_folder": {
+								"value": "@pipeline().parameters.metadata_foldor",
+								"type": "Expression"
+							},
+							"metadata_filename": {
+								"value": "@pipeline().parameters.metadata_json",
+								"type": "Expression"
+							}
+						}
 					},
 					"firstRowOnly": false
 				}

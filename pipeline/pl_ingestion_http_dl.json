@@ -13,7 +13,34 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "ds_metadata_json",
+						"type": "DatasetReference",
+						"parameters": {
+							"metadata_folder": {
+								"value": "@pipeline().parameters.metadata_location",
+								"type": "Expression"
+							},
+							"metadata_filename": {
+								"value": "@pipeline().parameters.metadata_filename",
+								"type": "Expression"
+							}
+						}
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -23,6 +50,10 @@
 			},
 			"sink_data_location": {
 				"type": "string"
+			},
+			"metadata_filename": {
+				"type": "string",
+				"defaultValue": "githubusercontent_ecdc_file_list.json"
 			}
 		},
 		"annotations": []
