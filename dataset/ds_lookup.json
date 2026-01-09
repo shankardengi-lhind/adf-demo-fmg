@@ -1,5 +1,5 @@
 {
-	"name": "ds_for_dataflow_source_death",
+	"name": "ds_lookup",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_metadata_dl",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "case_deaths_uk_ind_only.csv",
+				"fileName": "country_lookup.csv",
 				"fileSystem": "ecdc-folder"
 			},
 			"columnDelimiter": ",",
@@ -24,7 +24,11 @@
 				"type": "String"
 			},
 			{
-				"name": "country_code",
+				"name": "country_code_2_digit",
+				"type": "String"
+			},
+			{
+				"name": "country_code_3_digit",
 				"type": "String"
 			},
 			{
@@ -33,26 +37,6 @@
 			},
 			{
 				"name": "population",
-				"type": "String"
-			},
-			{
-				"name": "indicator",
-				"type": "String"
-			},
-			{
-				"name": "daily_count",
-				"type": "String"
-			},
-			{
-				"name": "date",
-				"type": "String"
-			},
-			{
-				"name": "rate_14_day",
-				"type": "String"
-			},
-			{
-				"name": "source",
 				"type": "String"
 			}
 		]

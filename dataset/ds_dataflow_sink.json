@@ -1,0 +1,23 @@
+{
+	"name": "ds_dataflow_sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sink_dl",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "uk_confirmed_death_cases.csv",
+				"fileSystem": "sink"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
