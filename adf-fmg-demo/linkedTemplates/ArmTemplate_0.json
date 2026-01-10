@@ -136,89 +136,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_http_source')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_source_http",
-					"type": "LinkedServiceReference",
-					"parameters": {
-						"base_url": {
-							"value": "@dataset().base_url",
-							"type": "Expression"
-						}
-					}
-				},
-				"parameters": {
-					"Relative_url": {
-						"type": "string"
-					},
-					"base_url": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "HttpServerLocation",
-						"relativeUrl": {
-							"value": "@dataset().Relative_url",
-							"type": "Expression"
-						}
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": false,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_source_http')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_metadata_json')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_metadata_dl",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"metadata_folder": {
-						"type": "string"
-					},
-					"metadata_filename": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": {
-							"value": "@dataset().metadata_filename",
-							"type": "Expression"
-						},
-						"fileSystem": {
-							"value": "@dataset().metadata_folder",
-							"type": "Expression"
-						}
-					}
-				},
-				"schema": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_metadata_dl')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_sink_dl')]",
+			"name": "[concat(parameters('factoryName'), '/ds_dataflow_sink')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -226,31 +144,17 @@
 					"referenceName": "ls_sink_dl",
 					"type": "LinkedServiceReference"
 				},
-				"parameters": {
-					"sink_folder": {
-						"type": "string"
-					},
-					"sink_filename": {
-						"type": "string"
-					}
-				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": {
-							"value": "@dataset().sink_filename",
-							"type": "Expression"
-						},
-						"fileSystem": {
-							"value": "@dataset().sink_folder",
-							"type": "Expression"
-						}
+						"fileName": "uk_confirmed_death_cases.csv",
+						"fileSystem": "sink"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
-					"firstRowAsHeader": true,
+					"firstRowAsHeader": false,
 					"quoteChar": "\""
 				},
 				"schema": []
@@ -325,6 +229,50 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_http_source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_source_http",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"base_url": {
+							"value": "@dataset().base_url",
+							"type": "Expression"
+						}
+					}
+				},
+				"parameters": {
+					"Relative_url": {
+						"type": "string"
+					},
+					"base_url": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": {
+							"value": "@dataset().Relative_url",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_source_http')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_lookup')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -374,7 +322,45 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_dataflow_sink')]",
+			"name": "[concat(parameters('factoryName'), '/ds_metadata_json')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_metadata_dl",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"metadata_folder": {
+						"type": "string"
+					},
+					"metadata_filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().metadata_filename",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().metadata_folder",
+							"type": "Expression"
+						}
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_metadata_dl')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_sink_dl')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -382,17 +368,31 @@
 					"referenceName": "ls_sink_dl",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"sink_folder": {
+						"type": "string"
+					},
+					"sink_filename": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "uk_confirmed_death_cases.csv",
-						"fileSystem": "sink"
+						"fileName": {
+							"value": "@dataset().sink_filename",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().sink_folder",
+							"type": "Expression"
+						}
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
-					"firstRowAsHeader": false,
+					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": []
@@ -652,8 +652,8 @@
 						"          indicator,",
 						"          daily_count,",
 						"          source,",
-						"          each(match(name == 'date'),",
-						"               'reported' + '_date' = $$)",
+						"          each(match(name=='date'),",
+						"               'reported'+'_date' = $$)",
 						"     ),",
 						"     skipDuplicateMapInputs: false,",
 						"     skipDuplicateMapOutputs: false) ~> selectdeathcolumns",
@@ -694,6 +694,53 @@
 				"[concat(variables('factoryId'), '/datasets/ds_for_dataflow_source_death')]",
 				"[concat(variables('factoryId'), '/datasets/ds_lookup')]",
 				"[concat(variables('factoryId'), '/datasets/ds_dataflow_sink')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"coviddeathdatasource": {},
+									"lookupsource": {},
+									"sinkukdeatandconfirmedcase": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflow1')]"
 			]
 		},
 		{
