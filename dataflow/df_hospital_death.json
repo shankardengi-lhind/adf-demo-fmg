@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "df_hospital_death",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -75,8 +75,8 @@
 				"          indicator,",
 				"          daily_count,",
 				"          source,",
-				"          each(match(name == 'date'),",
-				"               'reported' + '_date' = $$)",
+				"          each(match(name=='date'),",
+				"               'reported'+'_date' = $$)",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> selectdeathcolumns",
