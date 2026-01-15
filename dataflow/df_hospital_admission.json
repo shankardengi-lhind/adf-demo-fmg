@@ -47,13 +47,13 @@
 					"name": "joinDimHospital"
 				},
 				{
-					"name": "select1"
+					"name": "selectDesirecCoumns"
 				},
 				{
-					"name": "pivot1"
+					"name": "pivotWeekly"
 				},
 				{
-					"name": "pivot2"
+					"name": "pivotDaily"
 				}
 			],
 			"scriptLines": [
@@ -126,7 +126,7 @@
 				"     skipDuplicateMapOutputs: true) ~> selectReqFields2",
 				"selectReqFields2 split(indicator == \"Daily hospital occupancy\" || indicator == \"Daily ICU occupancy\",",
 				"     disjoint: false) ~> splitWeekly@(Daily, Weekly)",
-				"lookupdim aggregate(groupBy(ecdc_year_week = year + '-W' + lpad(day, 2, '0')),",
+				"lookupdim aggregate(groupBy(ecdc_year_week = year+'-W'+lpad(day,2,'0')),",
 				"     min = min(date),",
 				"          max = max(date)) ~> aggDimDate",
 				"splitWeekly@Weekly, aggDimDate join(reported_year_week == ecdc_year_week,",
@@ -148,8 +148,8 @@
 				"          max",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 pivot(groupBy(country,",
+				"     skipDuplicateMapOutputs: true) ~> selectDesirecCoumns",
+				"selectDesirecCoumns pivot(groupBy(country,",
 				"          reported_date,",
 				"          reported_year_week,",
 				"          source,",
@@ -160,7 +160,7 @@
 				"     pivotBy(indicator, ['Weekly new hospital admissions per 100k', 'Weekly new ICU admissions per 100k']),",
 				"     count = sum(value),",
 				"     columnNaming: '$V_$N',",
-				"     lateral: true) ~> pivot1",
+				"     lateral: true) ~> pivotWeekly",
 				"splitWeekly@Daily pivot(groupBy(country,",
 				"          reported_date,",
 				"          reported_year_week,",
@@ -171,7 +171,7 @@
 				"     pivotBy(indicator, ['Daily hospital occupancy', 'Daily ICU occupancy']),",
 				"     count = sum((value)),",
 				"     columnNaming: '$N_$V',",
-				"     lateral: true) ~> pivot2"
+				"     lateral: true) ~> pivotDaily"
 			]
 		}
 	}
