@@ -37,6 +37,10 @@
 							"metadata_filename": {
 								"value": "@pipeline().parameters.metadata_filename",
 								"type": "Expression"
+							},
+							"container": {
+								"value": "@pipeline().parameters.raw_container",
+								"type": "Expression"
 							}
 						}
 					},
@@ -127,10 +131,6 @@
 									"referenceName": "ds_sink_dl",
 									"type": "DatasetReference",
 									"parameters": {
-										"sink_folder": {
-											"value": "@pipeline().parameters.sink_data_location",
-											"type": "Expression"
-										},
 										"sink_filename": {
 											"value": "@item().sinkFileName",
 											"type": "Expression"
@@ -148,13 +148,13 @@
 				"type": "string",
 				"defaultValue": "metadata"
 			},
-			"sink_data_location": {
-				"type": "string",
-				"defaultValue": "ecdc-folder"
-			},
 			"metadata_filename": {
 				"type": "string",
 				"defaultValue": "githubusercontent_ecdc_file_list.json"
+			},
+			"raw_container": {
+				"type": "string",
+				"defaultValue": "raw"
 			}
 		},
 		"annotations": []
