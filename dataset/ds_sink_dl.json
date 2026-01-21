@@ -6,13 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"sink_folder": {
-				"type": "string"
-			},
 			"sink_filename": {
-				"type": "string"
-			},
-			"raw": {
 				"type": "string"
 			}
 		},
