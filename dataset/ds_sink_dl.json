@@ -25,11 +25,11 @@
 					"value": "@dataset().sink_filename",
 					"type": "Expression"
 				},
-				"folderPath": "@dataset().sink_folder",
-				"fileSystem": {
-					"value": "@dataset().raw",
+				"folderPath": {
+					"value": "@dataset().sink_folder",
 					"type": "Expression"
-				}
+				},
+				"fileSystem": "raw"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
