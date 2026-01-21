@@ -11,6 +11,10 @@
 			},
 			"metadata_filename": {
 				"type": "string"
+			},
+			"container": {
+				"type": "string",
+				"defaultValue": "raw"
 			}
 		},
 		"annotations": [],
@@ -22,8 +26,9 @@
 					"value": "@dataset().metadata_filename",
 					"type": "Expression"
 				},
+				"folderPath": "@dataset().metadata_folder",
 				"fileSystem": {
-					"value": "@dataset().metadata_folder",
+					"value": "@dataset().container",
 					"type": "Expression"
 				}
 			}
