@@ -11,6 +11,9 @@
 			},
 			"sink_filename": {
 				"type": "string"
+			},
+			"raw": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -22,8 +25,9 @@
 					"value": "@dataset().sink_filename",
 					"type": "Expression"
 				},
+				"folderPath": "@dataset().sink_folder",
 				"fileSystem": {
-					"value": "@dataset().sink_folder",
+					"value": "@dataset().raw",
 					"type": "Expression"
 				}
 			},
