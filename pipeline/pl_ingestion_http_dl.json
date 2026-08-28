@@ -154,7 +154,7 @@
 			},
 			"raw_container": {
 				"type": "string",
-				"defaultValue": "raw"
+				"defaultValue": "raws"
 			}
 		},
 		"annotations": []
